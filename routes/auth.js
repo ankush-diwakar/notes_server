@@ -32,9 +32,11 @@ router.post('/login', async (req, res) => {
             password: req.body.password,
         });
         if (!user) {
+          
             res.status(404).json({ message: 'Email or password incorrect!', status: false });
         } else {
-            res.status(200).json({ message: 'User logged in successfully!', status: true });
+            res.status(200).json({ message: 'User logged in successfully!', status: true, logedInUserId: user._id.toString(),user:user });
+            console.log(user._id.toString());
         }
     } catch (err) {
         res.status(500).json(err);
