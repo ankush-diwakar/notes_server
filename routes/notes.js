@@ -61,4 +61,15 @@ router.get('/allnotes', async (req, res) => {
     }
 })
 
+
+//get note by postedBy id
+router.get('/notebyuid/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).populate('notes');
+        res.status(200).json({ message: 'All notes fetched successfully', status: true, notes: user.notes });
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
 module.exports = router;
